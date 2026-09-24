@@ -406,11 +406,11 @@ st.markdown(
 | **Es gibt einen zulässigen Startfluss** | Cycle-Canceling braucht die Menge schon: erst ein größter Fluss (Edmonds-Karp), dann die Kosten. Wo die Menge erst aufgebaut wird, ist SSP die natürliche Wahl. **Ansatzpunkt: Successive Shortest Paths** (Stück 4). |
 | **Die Suche kostet wenig** | Jede Iteration durchsucht das ganze Netz nach einem Kreis: Bellman-Ford O(nm), Karp O(nm) mit O(n²) Speicher. Auf diesen Netzen ist SSP um ein Vielfaches billiger, auch wenn es mehr Runden braucht. **Ansatzpunkt: Netzwerksimplex** (Demo „network-flow-demo“): eine Baumstruktur statt einer neuen Suche je Kreis. |
 | **Ganzzahlige Kosten, kleine Kapazitäten** | Klein braucht höchstens (Startkosten − Optimum) Kreise - pseudopolynomial. Minimum-Mean bringt eine stark polynomiale Schranke, in der Praxis aber nur wenige Kreise weniger. **Ansatzpunkt: Cost Scaling** (Stück 6, gebaut): ε-Optimalität statt exakter Kreise. |
-| **Ein Gut, teilbar** | Alle Waren sind gleich und beliebig teilbar. Mehrere Güter auf gemeinsamen Kanten machen den Fluss im Allgemeinen gebrochen. **Ansatzpunkt: Mehrgüterfluss** (später in dieser Linie). |
+| **Ein Gut, teilbar** | Alle Waren sind gleich und beliebig teilbar. Mehrere Güter auf gemeinsamen Kanten machen den Fluss im Allgemeinen gebrochen. **Ansatzpunkt: Mehrgüterfluss** (gebaut: multicommodity-demo). |
 | **Keine Zeit** | Ein Fluss ist eine Momentaufnahme; Wartezeiten und Fahrpläne fehlen. **Ansatzpunkt:** Zeit-Raum-Netz in der Demo „leercontainer-demo“. |
 """
 )
-st.caption("Die Netzwerkfluss-Linie ist als Ganzes geplant: Edmonds-Karp, Dinic, Push-Relabel, Successive Shortest Paths, Cycle-Canceling (dieses Stück), Cost Scaling (gebaut), Mehrgüterfluss, Column Generation, Garg-Könemann, Fixkosten-Netzwerkdesign, Benders-Zerlegung und Slope Scaling - bisher sind die ersten sechs gebaut.")
+st.caption("Die Netzwerkfluss-Linie ist als Ganzes geplant: Edmonds-Karp, Dinic, Push-Relabel, Successive Shortest Paths, Cycle-Canceling (dieses Stück), Cost Scaling (gebaut), Mehrgüterfluss (gebaut), Column Generation, Garg-Könemann, Fixkosten-Netzwerkdesign, Benders-Zerlegung und Slope Scaling - bisher sind die ersten sieben gebaut.")
 
 st.markdown("---")
 
