@@ -8,7 +8,7 @@ SSP hält Optimalität und baut die Menge auf. Cycle-Canceling geht den umgekehr
 Gibt es keinen mehr, ist der Fluss kostenminimal. Verglichen werden **beliebige** Kreise (Klein), Kreise in **zufälliger** Reihenfolge und der Kreis mit dem **kleinsten Mittelwert** (Karp; Goldberg–Tarjan); dazu die Kosten der Suche gegen SSP. Vehikel wie in den Vorgänger-Demos: ein Distributionsnetz (Werke → Verteilzentren → Filialen) mit Kosten je Einheit, dazu zwei Lehrnetze.
 
 **Einordnung in die Reihe (die Kanten des Graphen):** Gegenstück zu SSP (Stück 4): dasselbe Ziel, umgekehrte Invariante. Der **Netzwerksimplex** (Fall-Demo `network-flow-demo`) ist verwandt – jeder Pivot löscht einen Fundamentalkreis –, arbeitet aber mit einer Baumstruktur statt mit einer neuen Suche je Kreis.
-**Cost Scaling** (gebaut: [cost-scaling-demo](https://github.com/sebastian-hanisch/cost-scaling-demo)) verallgemeinert die Bedingung „kein negativer Kreis“ zu ε-Optimalität. Bisher gebaut: die ersten sieben Stücke.
+**Cost Scaling** (gebaut: [cost-scaling-demo](https://github.com/sebastian-hanisch/cost-scaling-demo)) verallgemeinert die Bedingung „kein negativer Kreis“ zu ε-Optimalität. Bisher gebaut: die ersten acht Stücke.
 ```
 edmonds-karp-demo (Wurzel: Restgraph, Rückkanten, Max-Flow = Min-Cut)                  [gebaut]
   ├─ dinic-demo (viele kürzeste Wege je Phase: Niveaugraph, blockierender Fluss)        [gebaut]
@@ -18,8 +18,9 @@ edmonds-karp-demo (Wurzel: Restgraph, Rückkanten, Max-Flow = Min-Cut)          
        │    (network-flow-demo)                                                          [gebaut als Fall-Demo]
        ├─ cost-scaling-demo (Push-Relabel + ε-Skalierung, das nutzt OR-Tools)           [gebaut]
        └─ multicommodity-demo (mehrere Güter teilen Kapazität: Kanten-LP, Preise)       [gebaut]
-            → Column Generation, Garg-Könemann,
-              Fixkosten-Netzwerkdesign → Benders-Zerlegung, Slope Scaling               [geplant]
+            ├─ mcf-column-generation-demo (Pfade als Spalten, Pricing = Dijkstra)       [gebaut]
+            ├─ garg-koenemann-demo (Näherung mit Preisen, ohne LP-Löser)                [geplant]
+            └─ Fixkosten-Netzwerkdesign → Benders-Zerlegung, Slope Scaling              [geplant]
 ```
 
 ## Ergebnis (Zahlen aus den Tests)
