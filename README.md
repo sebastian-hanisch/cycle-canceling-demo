@@ -8,7 +8,7 @@ SSP hält Optimalität und baut die Menge auf. Cycle-Canceling geht den umgekehr
 Gibt es keinen mehr, ist der Fluss kostenminimal. Verglichen werden **beliebige** Kreise (Klein), Kreise in **zufälliger** Reihenfolge und der Kreis mit dem **kleinsten Mittelwert** (Karp; Goldberg–Tarjan); dazu die Kosten der Suche gegen SSP. Vehikel wie in den Vorgänger-Demos: ein Distributionsnetz (Werke → Verteilzentren → Filialen) mit Kosten je Einheit, dazu zwei Lehrnetze.
 
 **Einordnung in die Reihe (die Kanten des Graphen):** Gegenstück zu SSP (Stück 4): dasselbe Ziel, umgekehrte Invariante. Der **Netzwerksimplex** (Fall-Demo `network-flow-demo`) ist verwandt – jeder Pivot löscht einen Fundamentalkreis –, arbeitet aber mit einer Baumstruktur statt mit einer neuen Suche je Kreis.
-**Cost Scaling** (gebaut: [cost-scaling-demo](https://github.com/sebastian-hanisch/cost-scaling-demo)) verallgemeinert die Bedingung „kein negativer Kreis“ zu ε-Optimalität. Bisher gebaut: die ersten neun Stücke.
+**Cost Scaling** (gebaut: [cost-scaling-demo](https://github.com/sebastian-hanisch/cost-scaling-demo)) verallgemeinert die Bedingung „kein negativer Kreis“ zu ε-Optimalität. Bisher gebaut: die ersten zehn Stücke.
 ```
 edmonds-karp-demo (Wurzel: Restgraph, Rückkanten, Max-Flow = Min-Cut)                  [gebaut]
   ├─ dinic-demo (viele kürzeste Wege je Phase: Niveaugraph, blockierender Fluss)        [gebaut]
@@ -20,7 +20,9 @@ edmonds-karp-demo (Wurzel: Restgraph, Rückkanten, Max-Flow = Min-Cut)          
        └─ multicommodity-demo (mehrere Güter teilen Kapazität: Kanten-LP, Preise)       [gebaut]
             ├─ mcf-column-generation-demo (Pfade als Spalten, Pricing = Dijkstra)       [gebaut]
             ├─ garg-koenemann-demo (Näherung mit Preisen, ohne LP-Löser)                [gebaut]
-            └─ Fixkosten-Netzwerkdesign → Benders-Zerlegung, Slope Scaling              [geplant]
+            └─ fixkosten-netzdesign-demo (Fixkosten: Schranke und Schnitte)             [gebaut]
+                 ├─ Benders-Zerlegung (Entwurf im Master, Fluss im Teilproblem)         [geplant]
+                 └─ Slope Scaling (Heuristik für große Netze)                           [geplant]
 ```
 
 ## Ergebnis (Zahlen aus den Tests)
