@@ -140,11 +140,11 @@ def build_network(net, flow, pi=None, path=None, height=460):
         if i in path_map:
             fwd, amount = path_map[i]
             (fwd_path if fwd else back_path).append(curve)
-            labels.append((curve[3][0] + 1.5, curve[3][1], f"{'+' if fwd else '−'}{amount} × {cost if fwd else -cost}"))
+            labels.append((curve[0][3] + 1.5, curve[1][3], f"{'+' if fwd else '−'}{amount} × {cost if fwd else -cost}"))
         else:
             groups["idle" if flow[i] == 0 else "full" if flow[i] == cap else "part"].append((curve, flow[i]))
             if net.m <= 12:
-                labels.append((curve[3][0] + 1.5, curve[3][1], f"{flow[i]}/{cap} · {cost}"))
+                labels.append((curve[0][3] + 1.5, curve[1][3], f"{flow[i]}/{cap} · {cost}"))
     _lines(fig, [c for c, _ in groups["idle"]], C.COLORS["faint"], 1.2, "ungenutzt")
     for group, color, name in (("part", "rgba(31,119,180,0.85)", "Fluss (nicht voll)"), ("full", "#0b3d91", "Fluss (Kante voll)")):
         by_width = {}
