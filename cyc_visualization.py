@@ -82,10 +82,9 @@ def _hover_points(fig, net, entries):
 
 
 def _labels(fig, points):
-    """points: [(x, y, Text)]"""
-    if points:
-        fig.add_trace(go.Scatter(x=[p[0] for p in points], y=[p[1] for p in points], mode="text", text=[p[2] for p in points], textposition="middle right",
-                                 hoverinfo="skip", showlegend=False, textfont=dict(size=12)))
+    """points: [(x, y, Text)] - als Annotationen mit heller Hinterlegung, damit sie Kanten, Pfeile und Knotenbeschriftungen nicht unlesbar machen."""
+    for x, y, text in points:
+        fig.add_annotation(x=x, y=y, text=text, showarrow=False, xanchor="left", font=dict(size=11, color="#111"), bgcolor="rgba(255,255,255,0.88)", borderpad=1)
 
 
 def _arc_name(net, i):
@@ -122,7 +121,7 @@ def _node_text_positions(net, idx):
 
 
 def _colorbar(lo, hi):
-    return dict(title=dict(text="Schattenpreis π", side="right"), orientation="h", thickness=9, len=0.6, x=0.5, xanchor="center", y=-0.04, yanchor="top", tickmode="linear", tick0=lo, dtick=max(1, (hi - lo) // 8))
+    return dict(title=dict(text="Schattenpreis π", side="top"), orientation="h", thickness=9, len=0.6, x=0.5, xanchor="center", y=-0.02, yanchor="top", tickmode="linear", tick0=lo, dtick=max(1, -(-(hi - lo) // 4)))
 
 
 def build_network(net, flow, pi=None, path=None, height=460):
@@ -175,7 +174,7 @@ def build_network(net, flow, pi=None, path=None, height=460):
                              textposition=_node_text_positions(net, idx), hovertext=hover_nodes, hoverinfo="text", marker=marker))
     fig = _layout(fig, net, height)
     if pi is not None:
-        fig.update_layout(margin=dict(l=10, r=10, t=10, b=50), legend=dict(orientation="h", y=-0.2))
+        fig.update_layout(margin=dict(l=10, r=10, t=10, b=90), legend=dict(orientation="h", y=-0.3))
     return fig
 
 
@@ -203,7 +202,7 @@ def build_descent(start_total, iterations, k, optimum, height=230):
     fig.add_trace(go.Scatter(x=list(range(k + 1)), y=totals[:k + 1], mode="lines+markers", line=dict(color=C.COLORS["flow"], width=3), marker=dict(size=6),
                              hovertext=[f"nach {i} Kreisen: Gesamtkosten {y}" for i, y in enumerate(totals[:k + 1])], hoverinfo="text", showlegend=False))
     fig.add_trace(go.Scatter(x=[k], y=[totals[k]], mode="markers", marker=dict(size=12, color=C.COLORS["optimal"], symbol="circle-open", line=dict(width=3)), hoverinfo="skip", showlegend=False))
-    fig.add_hline(y=optimum, line=dict(color="#555", dash="dash"), annotation_text=f"Optimum (SSP) {optimum}", annotation_position="top right")
+    fig.add_hline(y=optimum, line=dict(color="#555", dash="dash"), annotation_text=f"Optimum (SSP) {optimum}", annotation_position="top left")
     fig.update_xaxes(title="Kreise gelöscht", dtick=1 if len(totals) <= 21 else None, range=[-0.3, max(1, len(iterations)) + 0.3])
     fig.update_yaxes(title="Gesamtkosten", range=[min(optimum, min(totals)) * 0.97, start_total * 1.02])
     fig = _base(fig, height)
@@ -237,7 +236,7 @@ def build_gap_hist(gaps, current=None, height=300):
     fig.update_xaxes(title="Mehrkosten des Startflusses [%]")
     fig.update_yaxes(title="Netze")
     fig = _base(fig, height)
-    fig.update_layout(showlegend=False)
+    fig.update_layout(showlegend=False, margin=dict(l=10, r=10, t=30 if current is not None else 10, b=10))
     return fig
 
 
@@ -252,7 +251,7 @@ def build_cycles_compare(klein, klein_random, min_mean, current=None, height=300
     fig.update_xaxes(title="gelöschte Kreise")
     fig.update_yaxes(title="Netze")
     fig = _base(fig, height)
-    fig.update_layout(legend=dict(orientation="h", y=-0.35), height=height + 50)
+    fig.update_layout(legend=dict(orientation="h", y=-0.35), height=height + 50, margin=dict(l=10, r=10, t=30 if current is not None else 10, b=10))
     return fig
 
 
