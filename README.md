@@ -8,7 +8,7 @@ SSP hält Optimalität und baut die Menge auf. Cycle-Canceling geht den umgekehr
 Gibt es keinen mehr, ist der Fluss kostenminimal. Verglichen werden **beliebige** Kreise (Klein), Kreise in **zufälliger** Reihenfolge und der Kreis mit dem **kleinsten Mittelwert** (Karp; Goldberg–Tarjan); dazu die Kosten der Suche gegen SSP. Vehikel wie in den Vorgänger-Demos: ein Distributionsnetz (Werke → Verteilzentren → Filialen) mit Kosten je Einheit, dazu zwei Lehrnetze.
 
 **Einordnung in die Reihe (die Kanten des Graphen):** Gegenstück zu SSP (Stück 4): dasselbe Ziel, umgekehrte Invariante. Der **Netzwerksimplex** (Fall-Demo `network-flow-demo`) ist verwandt – jeder Pivot löscht einen Fundamentalkreis –, arbeitet aber mit einer Baumstruktur statt mit einer neuen Suche je Kreis.
-**Cost Scaling** (gebaut: [cost-scaling-demo](https://github.com/sebastian-hanisch/cost-scaling-demo)) verallgemeinert die Bedingung „kein negativer Kreis“ zu ε-Optimalität. Bisher gebaut: alle zwölf Stücke der Hauptlinie.
+**Cost Scaling** (gebaut: [cost-scaling-demo](https://github.com/sebastian-hanisch/cost-scaling-demo)) verallgemeinert die Bedingung „kein negativer Kreis“ zu ε-Optimalität. Bisher gebaut: alle dreizehn Stücke der Hauptlinie.
 ```
 edmonds-karp-demo (Wurzel: Restgraph, Rückkanten, Max-Flow = Min-Cut)                  [gebaut]
   ├─ dinic-demo (viele kürzeste Wege je Phase: Niveaugraph, blockierender Fluss)        [gebaut]
