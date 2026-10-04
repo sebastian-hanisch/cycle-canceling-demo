@@ -41,7 +41,7 @@ Edmonds-Karp und SSP sind aus den Vorgänger-Demos kopiert; Wache-Tests: 52 475 
 | Wie teuer ist die Suche gegen SSP? | ❌ Deutlich: Klein 1509, Minimum-Mean 6717 gegen **539** bei SSP. Von 12 auf 166 Knoten wächst der Abstand: Klein 2,4- bis 6,4-fach, Minimum-Mean im größten Netz 254-fach (44,7 Mio. gegen 176 000 Kanten); Steigung im doppelt logarithmischen Diagramm 1,93 (Klein), 2,52 (Minimum-Mean), 1,69 (SSP). |
 | Hängt die Kreiszahl vom Startfluss ab? | ⚠️ Lose: Breitensuche 12,7 % Startlücke und 4,86 Kreise, Tiefensuche 13,0 % und 4,73, **breitester Weg 11,5 % und 5,72**: die kleinste Lücke hat die meisten Kreise. Korrelation Lücke–Kreise über 120 Läufe (40 Netze × 3 Startflüsse): 0,50. |
 | Pseudopolynomial – in der Praxis? | ✅ Die Schranke (Startkosten − Optimum, im Mittel 106) ist weit weg: gemessen 6,8 % davon (höchstens 50 %). Kapazitäten × 1, 10, 100, 1000 lassen Kreise (4,3), durchsuchte Kanten (1327) und Kreiszahl von Minimum-Mean (3,9) unverändert; die Schranke wächst mit dem Faktor. |
-| Was passiert bei einer Suche nur von S aus? | ❌ Nach einem größten Fluss ist S gesättigt, im Restgraphen erreicht es kaum etwas: in **36 von 100 Netzen** bleibt der Fluss zu teuer (dort im Mittel +7,3 %, höchstens +26,3 %), in 26 Netzen findet die Suche gar keinen Kreis. Seed 167: 1372 statt 1051 (+30,5 %); auf dem Umweg 9 statt 2. Der Beweis im letzten Bild schlägt fehl. |
+| Was passiert bei einer Suche nur von S aus? | ❌ Nach einem größten Fluss erreicht S im Restgraphen nur noch den Teil des Netzes vor dem Engpass: in **36 von 100 Netzen** bleibt der Fluss zu teuer (dort im Mittel +7,3 %, höchstens +26,3 %), in 26 Netzen findet die Suche gar keinen Kreis. Seed 167: 1372 statt 1051 (+30,5 %); auf dem Umweg 9 statt 2. Der Beweis im letzten Bild schlägt fehl. |
 
 ## Was nicht funktioniert hat / Vorab-Hypothesen
 
@@ -52,7 +52,7 @@ Vor dem Schreiben der Texte wurde über die 100 Netze gemessen; einige Vermutung
 - **„Cycle-Canceling ist gegen SSP konkurrenzfähig.“** Nicht in durchsuchten Kanten: SSP sucht von S aus mit Dijkstra, bricht bei T ab und braucht 539 Kanten; Cycle-Canceling muss das ganze Netz nach einem Kreis durchsuchen (Klein 1509, Minimum-Mean 6717).
 - **„Je teurer der Startfluss, desto mehr Kreise.“** Nur lose (Korrelation 0,50): der breiteste Weg hat die kleinste Startlücke und die meisten Kreise.
 - **„Bei größeren Kapazitäten braucht Cycle-Canceling mehr Kreise (pseudopolynomial).“** Nicht in dieser Messung: Kapazitäten × 1000 ändern die Kreiszahl nicht, weil Startfluss und Kreise mitskalieren; nur die Schranke wächst.
-- **„Die Suche nur von S aus genügt.“** Falsch, und tückisch (siehe Tabelle): S ist nach einem größten Fluss gesättigt; die negativen Kreise liegen woanders.
+- **„Die Suche nur von S aus genügt.“** Falsch, und tückisch (siehe Tabelle): von S aus ist nach einem größten Fluss nur der Teil vor dem Engpass erreichbar; die negativen Kreise liegen woanders.
 - **Aufwand der Suche hängt an der Umsetzung:** die Bellman-Ford-Suche prüft nach jedem Durchlauf mit Verbesserung den Vorgänger-Graphen auf einen Kreis. Ohne diese Erkennung (Kreis erst im n-ten Durchlauf) durchsuchte Klein im Standardnetz-Mittel 6094 statt 1509 Kanten – gemessen, bevor die Erkennung eingebaut wurde; nicht als Test geführt, deshalb steht die Zahl nicht in der Ergebnistabelle.
 - **Abweichungen vom Plan:** Port 8677; kein PDF-Export; Startfluss wählbar (Breitensuche, Tiefensuche, breitester Weg) statt nur Breitensuche.
 
@@ -106,3 +106,7 @@ venv\Scripts\python -m pytest tests -v
 
 Die Logik rechnet ausschließlich mit ganzen Zahlen (Mittelwerte als exakte Brüche); die im Text genannten Anteile und Mediane sind deshalb auf jeder Plattform identisch.
 Die CI (`.github/workflows/tests.yml`) läuft auf Ubuntu mit Python 3.12, bei jedem Push und wöchentlich mit den jeweils neuesten Bibliotheksversionen.
+
+---
+
+Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zur Reihe: [Netzwerkfluss: vom Max-Flow zum Netzdesign](https://sebastianhanisch.net/konzepte-netzwerkfluss.html).

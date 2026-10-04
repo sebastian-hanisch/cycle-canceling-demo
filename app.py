@@ -120,7 +120,7 @@ with st.sidebar:
     selection = st.radio(
         "Welcher negative Kreis?", list(C.SELECTION_LABELS), key="selection_radio", format_func=lambda k: C.SELECTION_LABELS[k],
         help="Klein: der erste Kreis, den Bellman-Ford findet. Zufällig: dieselbe Suche mit gemischter Kantenreihenfolge. Minimum-Mean: der Kreis mit den kleinsten Kosten je Kante (Karp) - im Standardnetz-Mittel 4,1 statt 4,9 Kreise, aber 6717 statt 1509 durchsuchte Kanten. "
-             "Nur von S aus ist eine Negativkontrolle: nach dem größten Fluss erreicht S im Restgraphen kaum etwas, die Suche übersieht Kreise und meldet zu früh „fertig“.",
+             "Nur von S aus ist eine Negativkontrolle: nach dem größten Fluss erreicht S im Restgraphen nur den Teil des Netzes vor dem Engpass, die Suche übersieht Kreise und meldet zu früh „fertig“.",
     )
     rule = st.radio(
         "Startfluss", list(C.RULE_LABELS), key="rule_radio", format_func=lambda k: C.RULE_LABELS[k],
@@ -389,7 +389,7 @@ else:
                    "Jede Iteration sucht im ganzen Restgraphen; die Zahl der Iterationen wächst dabei etwa mit der Kantenzahl.")
 
 st.subheader("🔬 Nur von S aus suchen")
-st.caption("Man könnte meinen, negative Kreise müssten von S erreichbar sein. Nach einem größten Fluss ist S aber vollständig gesättigt: im Restgraphen führt fast keine Kante mehr von S weg. Was passiert, wenn Bellman-Ford nur dort sucht?")
+st.caption("Man könnte meinen, negative Kreise müssten von S erreichbar sein. Nach einem größten Fluss erreicht man von S aus im Restgraphen aber nur noch den Teil des Netzes vor dem Engpass (dem kleinsten Schnitt); im Umweg-Netz ist es nur S selbst. Was passiert, wenn Bellman-Ford nur dort sucht?")
 if dist is None:
     st.info("Für die Verteilung über viele Netze ein zufälliges Distributionsnetz wählen. Das Preset „Umweg“ zeigt den Fall im Kleinen: die Suche von S aus findet nichts, der Fluss bleibt bei 9 statt 2.")
 else:
@@ -449,6 +449,6 @@ st.markdown("---")
 
 st.caption(
     "Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – "
-    "Operations Research und Machine Learning. Interesse an einer maßgeschneiderten Lösung für "
-    "Ihr Unternehmen? [Kontakt aufnehmen](https://sebastianhanisch.net/kontakt.html)"
+    "Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). "
+    "Mehr zur Reihe: [Netzwerkfluss: vom Max-Flow zum Netzdesign](https://sebastianhanisch.net/konzepte-netzwerkfluss.html)."
 )
