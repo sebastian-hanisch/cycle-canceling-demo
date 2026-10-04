@@ -1,6 +1,6 @@
 # Cycle-Canceling – negative Kreise löschen – Streamlit-Demo
 
-*(noch nicht deployed)*
+**[→ Demo live ausprobieren](https://sebastianhanisch-cycle-canceling-demo.streamlit.app/)**
 
 Fünftes Stück der **Netzwerkfluss-Linie** der "Konzepte"-Reihe für die Website "Sebastian Hanisch – Operations Research und Machine Learning", Gegenstück zu [Successive Shortest Paths](https://github.com/sebastian-hanisch/ssp-demo) und Fortsetzung von [Edmonds-Karp](https://github.com/sebastian-hanisch/edmonds-karp-demo), [Dinic](https://github.com/sebastian-hanisch/dinic-demo) und [Push-Relabel](https://github.com/sebastian-hanisch/push-relabel-demo):
 anders als die Fall-Demos im Portfolio (ein Anwendungsfall, mehrere Verfahren im Vergleich) zeigt diese Demo **ein** Verfahren – **Cycle-Canceling** (Klein 1967; Goldberg und Tarjan 1989) – an einem wachsenden Beispiel.

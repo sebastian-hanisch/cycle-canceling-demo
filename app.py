@@ -86,7 +86,7 @@ st.caption(
 with st.expander("So funktioniert Cycle-Canceling", expanded=True):
     st.markdown(
         r"""
-1. **Startfluss:** irgendein zulässiger Fluss der gewünschten Menge - hier ein größter Fluss von Edmonds-Karp (Breitensuche, Tiefensuche oder breitester Weg). Er ist zulässig, aber kostenblind.
+1. **Startfluss:** irgendein zulässiger Fluss der gewünschten Menge - hier ein größter Fluss durch Verbesserungswege (Breitensuche = Edmonds-Karp, breitester Weg = zweite Regel von Edmonds und Karp, Tiefensuche = Ford-Fulkerson). Er ist zulässig, aber kostenblind.
 2. **Restgraph:** jede Kante mit freier Kapazität ist eine **Vorwärtskante** mit Kosten $c$, jede Kante mit Fluss hat eine **Rückkante** mit Kosten $-c$.
 3. **Negativer Kreis:** suche im Restgraphen einen geschlossenen Weg mit negativen Gesamtkosten (Bellman-Ford, gedachter Start mit Entfernung 0 zu allen Knoten). Schiebe entlang des Kreises den **Engpass**: die Menge bleibt gleich, die Kosten sinken um Engpass × |Kreiskosten|.
 4. **Ende:** findet die Suche keinen negativen Kreis mehr, ist der Fluss kostenminimal für seine Menge. Zu jedem negativen Kreis gibt es umgekehrt eine Verbesserung - deshalb ist „kein negativer Kreis“ genau die Optimalitätsbedingung.
